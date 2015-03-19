@@ -1,24 +1,20 @@
 package ohtu.verkkokauppa;
 
-public class Pankki {
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-    private static Pankki instanssi;
+@Component
+public class Pankki implements PankkiInterface {
+    private KirjanpitoInterface kirjanpito;
 
-    public static Pankki getInstance() {
-        if (instanssi == null) {
-            instanssi = new Pankki();
-        }
-
-        return instanssi;
-    }
-    private Kirjanpito kirjanpito;
-
-    private Pankki() {
-        kirjanpito = Kirjanpito.getInstance();
+    @Autowired
+    public Pankki(KirjanpitoInterface kirjanpito) {
+        this.kirjanpito = kirjanpito;
     }
 
+    @Override
     public boolean tilisiirto(String nimi, int viitenumero, String tililta, String tilille, int summa) {
-        kirjanpito.lisaaTapahtuma("tilisiirto: tililtä " + tilille + " tilille " + tilille
+        kirjanpito.lisaaTapahtuma("tilisiirto: tililtä " + tililta + " tilille " + tilille
                 + " viite " + viitenumero + " summa " + summa + "e");
 
         // täällä olisi koodi joka ottaa yhteyden pankin verkkorajapintaan
