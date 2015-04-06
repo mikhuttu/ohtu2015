@@ -1,7 +1,5 @@
-
 package ohtu.verkkokauppa;
 
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
@@ -32,7 +30,7 @@ public class KauppaTest {
         kauppa.lisaaKoriin(1);
         kauppa.tilimaksu("pekka", "12345");
         
-        verify(pankki).tilisiirto("pekka", 16, "12345", anyString(), 5);
+        verify(pankki).tilisiirto(eq("pekka"), eq(16), eq("12345"), anyString(), eq(5));
     }
     
     @Test
@@ -48,7 +46,7 @@ public class KauppaTest {
         kauppa.lisaaKoriin(5);
         kauppa.tilimaksu("jonne", "62345");
         
-        verify(pankki).tilisiirto("jonne", 14, "62345", anyString(), 17);
+        verify(pankki).tilisiirto(eq("jonne"), eq(14), eq("62345"), anyString(), eq(17));
     }
     
     @Test
@@ -62,7 +60,7 @@ public class KauppaTest {
         kauppa.lisaaKoriin(1);
         kauppa.tilimaksu("jonne", "62345");
         
-        verify(pankki).tilisiirto("jonne", 9, "62345", anyString(), 10);
+        verify(pankki).tilisiirto(eq("jonne"), eq(9), eq("62345"), anyString(), eq(10));
     }
     
     @Test
@@ -78,7 +76,7 @@ public class KauppaTest {
         kauppa.lisaaKoriin(5);
         kauppa.tilimaksu("jonne", "62345");
         
-        verify(pankki).tilisiirto("jonne", 3, "62345", anyString(), 5);
+        verify(pankki).tilisiirto(eq("jonne"), eq(3), eq("62345"), anyString(), eq(5));
     }
     
     @Test
@@ -92,7 +90,7 @@ public class KauppaTest {
         kauppa.aloitaAsiointi();
         kauppa.tilimaksu("jonne", "62345");
         
-        verify(pankki).tilisiirto("jonne", anyInt(), "62345", anyString(), 0);
+        verify(pankki).tilisiirto(eq("jonne"), anyInt(), eq("62345"), anyString(), eq(0));
     }
     
     @Test
