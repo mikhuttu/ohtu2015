@@ -1,8 +1,6 @@
-package ohtu.kivipaperisakset;
+package ohtu.kivipaperisakset.kirjanpito;
 
-// Tuomari pitää kirjaa ensimmäisen ja toisen pelaajan pisteistä sekä tasapelien määrästä.
 public class Tuomari {
-
     private int ekanPisteet;
     private int tokanPisteet;
     private int tasapelit;
@@ -23,17 +21,11 @@ public class Tuomari {
         }
     }
 
-    // sisäinen metodi, jolla tarkastetaan tuliko tasapeli
-    private static boolean tasapeli(String eka, String toka) {
-        if (eka.equals(toka)) {
-            return true;
-        }
-
-        return false;
+    private boolean tasapeli(String eka, String toka) {
+        return eka.equals(toka);
     }
 
-    // sisäinen metodi joka tarkastaa voittaako eka pelaaja tokan
-    private static boolean ekaVoittaa(String eka, String toka) {
+    private boolean ekaVoittaa(String eka, String toka) {
         if ("k".equals(eka) && "s".equals(toka)) {
             return true;
         } else if ("s".equals(eka) && "p".equals(toka)) {
@@ -45,9 +37,9 @@ public class Tuomari {
         return false;
     }
 
+    @Override
     public String toString() {
-        String s = "Pelitilanne: " + ekanPisteet + " - " + tokanPisteet + "\n"
+        return "Pelitilanne: " + ekanPisteet + " - " + tokanPisteet + "\n"
                 + "Tasapelit: " + tasapelit;
-        return s;
     }
 }

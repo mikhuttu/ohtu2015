@@ -1,5 +1,8 @@
 package ohtu.kivipaperisakset;
 
+import ohtu.kivipaperisakset.pelimoodit.VsPerusTekoaly;
+import ohtu.kivipaperisakset.pelimoodit.VsPelaaja;
+import ohtu.kivipaperisakset.pelimoodit.VsParannettuTekoaly;
 import java.util.Scanner;
 
 public class Paaohjelma {
@@ -18,15 +21,15 @@ public class Paaohjelma {
             String vastaus = scanner.nextLine();
             if (vastaus.endsWith("a")) {
                 System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                KPSPelaajaVsPelaaja kaksinpeli = new KPSPelaajaVsPelaaja();
+                VsPelaaja kaksinpeli = new VsPelaaja();
                 kaksinpeli.pelaa();
             } else if (vastaus.endsWith("b")) {
                 System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                KPSTekoaly yksinpeli = new KPSTekoaly();
+                VsPerusTekoaly yksinpeli = new VsPerusTekoaly();
                 yksinpeli.pelaa();
             } else if (vastaus.endsWith("c")) {
                 System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                KPSParempiTekoaly pahaYksinpeli = new KPSParempiTekoaly();
+                VsParannettuTekoaly pahaYksinpeli = new VsParannettuTekoaly();
                 pahaYksinpeli.pelaa();
             } else {
                 break;
