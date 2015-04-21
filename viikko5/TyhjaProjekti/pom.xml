@@ -17,6 +17,7 @@
 
     <dependencies>
         <dependency>
+<<<<<<< HEAD
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.1</version>
@@ -31,11 +32,14 @@
         </dependency>
         
         <dependency>
+=======
+>>>>>>> mluukkai-lokaali
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -48,12 +52,15 @@
             <version>3.1</version>
             <type>jar</type>
         </dependency>
+=======
+>>>>>>> mluukkai-lokaali
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+<<<<<<< HEAD
                 <version>2.3.2</version>
                 <configuration>
                     <source>1.6</source>
@@ -95,6 +102,13 @@
             </plugin>
             
             
+=======
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+>>>>>>> mluukkai-lokaali
         </plugins>
     </build>
 </project>

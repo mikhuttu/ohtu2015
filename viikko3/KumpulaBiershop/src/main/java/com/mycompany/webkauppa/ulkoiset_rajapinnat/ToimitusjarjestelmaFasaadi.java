@@ -4,6 +4,7 @@ import com.mycompany.webkauppa.sovelluslogiikka.Ostos;
 import java.util.*;
 
 public class ToimitusjarjestelmaFasaadi {
+<<<<<<< HEAD
 
     private static ToimitusjarjestelmaFasaadi instance;
 
@@ -18,6 +19,12 @@ public class ToimitusjarjestelmaFasaadi {
 
     public ToimitusjarjestelmaFasaadi() {
         toimitukset = new ArrayList<String>();
+=======
+    private ArrayList<String> toimitukset;
+
+    public ToimitusjarjestelmaFasaadi() {
+        toimitukset = new ArrayList<>();
+>>>>>>> mluukkai-lokaali
     }    
     
     public void kirjaatoimitus(String nimi, String osoite, List<Ostos> ostokset){

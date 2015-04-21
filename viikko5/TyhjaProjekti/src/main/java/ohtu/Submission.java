@@ -1,5 +1,6 @@
 package ohtu;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 public class Submission {
@@ -84,6 +85,22 @@ public class Submission {
         if (tehtava) {
             tehdyt.add(tehtNr);
         }
+=======
+public class Submission {
+    private String student_number;
+
+    public String getStudent_number() {
+        return student_number;
+    }
+
+    public void setStudent_number(String student_number) {
+        this.student_number = student_number;
+    }
+
+    @Override
+    public String toString() {
+        return student_number;
+>>>>>>> mluukkai-lokaali
     }
     
 }

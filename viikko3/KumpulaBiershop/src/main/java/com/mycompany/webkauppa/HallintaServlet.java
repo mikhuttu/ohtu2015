@@ -9,12 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HallintaServlet extends WebKauppaServlet {
 
+<<<<<<< HEAD
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setAttribute("tuotteet", varasto.tuotteidenLista());
         request.setAttribute("maksut", PankkiFasaadi.getInstance().maksut());
         request.setAttribute("toimitukset", ToimitusjarjestelmaFasaadi.getInstance().toimitukset());
+=======
+    protected void processRequest(PankkiFasaadi pankki, ToimitusjarjestelmaFasaadi toimitus, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setAttribute("tuotteet", varasto.tuotteidenLista());
+        request.setAttribute("maksut", pankki.maksut());
+        request.setAttribute("toimitukset", toimitus.toimitukset());
+>>>>>>> mluukkai-lokaali
 
         naytaSivu("/hallinta.jsp", request, response);
     }

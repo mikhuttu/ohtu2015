@@ -2,11 +2,16 @@ package ohtu;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+<<<<<<< HEAD
+=======
+import org.openqa.selenium.WebElement;
+>>>>>>> mluukkai-lokaali
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class Tester {
     public static void main(String[] args) {
         WebDriver driver = new HtmlUnitDriver();
+<<<<<<< HEAD
         driver.get("http://localhost:8090");
 
         luoKayttajaJaKirjauduUlos(driver, "koira7");
@@ -73,5 +78,26 @@ public class Tester {
     
     private static void tulostaSivunSisalto(WebDriver driver) {
         System.out.println( driver.getPageSource() );
+=======
+
+        driver.get("http://localhost:8090");
+        System.out.println( driver.getPageSource() );
+        WebElement element = driver.findElement(By.linkText("login"));       
+        element.click(); 
+        
+        System.out.println("==");
+        
+        System.out.println( driver.getPageSource() );
+        element = driver.findElement(By.name("username"));
+        element.sendKeys("pekka");
+        element = driver.findElement(By.name("password"));
+        element.sendKeys("akkep");
+        element = driver.findElement(By.name("login"));
+        element.submit();
+        
+        System.out.println("==");
+        System.out.println( driver.getPageSource() );
+        
+>>>>>>> mluukkai-lokaali
     }
 }

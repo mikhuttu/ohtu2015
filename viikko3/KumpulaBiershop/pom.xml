@@ -21,8 +21,18 @@
             <artifactId>gson</artifactId>
             <version>1.7.1</version>
             <scope>compile</scope>
+<<<<<<< HEAD
         </dependency>        
         
+=======
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <type>jar</type>
+        </dependency>
+>>>>>>> mluukkai-lokaali
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -65,8 +75,13 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
+<<<<<<< HEAD
                     <source>1.6</source>
                     <target>1.6</target>
+=======
+                    <source>1.8</source>
+                    <target>1.8</target>
+>>>>>>> mluukkai-lokaali
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>

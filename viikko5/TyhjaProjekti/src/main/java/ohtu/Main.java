@@ -1,5 +1,6 @@
 package ohtu;
 
+<<<<<<< HEAD
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,3 +49,10 @@ public class Main {
 
     }
 }
+=======
+public class Main {
+
+    public static void main(String[] args) {
+    }
+}
+>>>>>>> mluukkai-lokaali

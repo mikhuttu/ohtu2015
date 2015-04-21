@@ -1,6 +1,9 @@
 package com.mycompany.webkauppa;
 
+<<<<<<< HEAD
 import com.mycompany.webkauppa.ohjaus.OstoksenPoistoKorista;
+=======
+>>>>>>> mluukkai-lokaali
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +16,12 @@ public class PoistaOstoskoristaServlet extends WebKauppaServlet {
                 
         long tuoteId = Long.parseLong( request.getParameter("tuoteId") );
         
+<<<<<<< HEAD
         OstoksenPoistoKorista poisto = new OstoksenPoistoKorista(haeSessionOstoskori(request),  tuoteId );          
         poisto.suorita();        
+=======
+        tehdas.ostoksenPoistoKorista(haeSessionOstoskori(request), tuoteId).suorita(varasto);
+>>>>>>> mluukkai-lokaali
         
         naytaSivu("/MaksaOstokset", request, response);
     }

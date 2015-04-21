@@ -9,6 +9,7 @@ public class Kassapaate {
     }
     
     public void lataa(Lyyrakortti kortti, int summa){
+<<<<<<< HEAD
         if (summa > 0) {
             kortti.lataa(summa);
         }
@@ -20,6 +21,14 @@ public class Kassapaate {
             kortti.osta(HINTA);
             myytyjaLounaita++;
         }
+=======
+        kortti.lataa(summa);
+    }
+    
+    public void ostaLounas(Lyyrakortti kortti) {
+        kortti.osta(HINTA);
+        myytyjaLounaita++;
+>>>>>>> mluukkai-lokaali
     }
 
     public int getMyytyjaLounaita() {

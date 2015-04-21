@@ -1,16 +1,27 @@
 package ohtu.services;
 
+<<<<<<< HEAD
 import ohtu.data_access.UserDao;
 import ohtu.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+=======
+import ohtu.domain.User;
+import java.util.ArrayList;
+import java.util.List;
+import ohtu.data_access.UserDao;
+
+>>>>>>> mluukkai-lokaali
 public class AuthenticationService {
 
     private UserDao userDao;
 
+<<<<<<< HEAD
     @Autowired
+=======
+>>>>>>> mluukkai-lokaali
     public AuthenticationService(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -41,6 +52,7 @@ public class AuthenticationService {
     }
 
     private boolean invalid(String username, String password) {
+<<<<<<< HEAD
         return usernameInvalid(username) || usernameTaken(username) || passwordInvalid(password);
     }
 
@@ -75,6 +87,10 @@ public class AuthenticationService {
                 return true;
             }
         }
+=======
+        // validity check of username and password
+
+>>>>>>> mluukkai-lokaali
         return false;
     }
 }

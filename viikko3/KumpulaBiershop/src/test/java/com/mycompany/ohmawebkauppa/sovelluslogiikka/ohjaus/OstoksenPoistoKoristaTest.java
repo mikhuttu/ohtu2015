@@ -1,5 +1,9 @@
 package com.mycompany.ohmawebkauppa.sovelluslogiikka.ohjaus;
 
+<<<<<<< HEAD
+=======
+import com.mycompany.webkauppa.ohjaus.KomentoTehdas;
+>>>>>>> mluukkai-lokaali
 import com.mycompany.webkauppa.ohjaus.OstoksenPoistoKorista;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,14 +11,23 @@ import static org.junit.Assert.*;
 import com.mycompany.webkauppa.sovelluslogiikka.*;
 
 public class OstoksenPoistoKoristaTest {
+<<<<<<< HEAD
 
     Varasto varasto = Varasto.getInstance();
+=======
+    KomentoTehdas tehdas;
+    Varasto varasto = new Varasto();
+>>>>>>> mluukkai-lokaali
     Ostoskori kori;
     long tuoteid = 1;
     OstoksenPoistoKorista ostoksenPoisto;
 
     @Before
     public void setUp() {
+<<<<<<< HEAD
+=======
+        tehdas = new KomentoTehdas();
+>>>>>>> mluukkai-lokaali
         Tuote tuote = varasto.etsiTuote(tuoteid);
         kori = new Ostoskori();
         kori.lisaaTuote(tuote);
@@ -22,8 +35,12 @@ public class OstoksenPoistoKoristaTest {
 
     @Test
     public void poistettuTuoteEiEnaaKorissa() {
+<<<<<<< HEAD
         ostoksenPoisto = new OstoksenPoistoKorista(kori, tuoteid);
         ostoksenPoisto.suorita();
+=======
+        tehdas.ostoksenPoistoKorista(kori, tuoteid).suorita(varasto);
+>>>>>>> mluukkai-lokaali
     
         assertEquals(0, kori.tuotteitaKorissa());
         assertEquals(0, kori.hinta());
@@ -33,6 +50,7 @@ public class OstoksenPoistoKoristaTest {
     @Test
     public void tuotteenMaaraKasvaa(){
         int varastossaAluksi = varasto.etsiTuote(tuoteid).getSaldo();
+<<<<<<< HEAD
         
         ostoksenPoisto = new OstoksenPoistoKorista(kori, tuoteid);
         ostoksenPoisto.suorita();
@@ -41,3 +59,10 @@ public class OstoksenPoistoKoristaTest {
     }
 
 }
+=======
+        tehdas.ostoksenPoistoKorista(kori, tuoteid).suorita(varasto);
+    
+        assertEquals(varastossaAluksi+1, varasto.etsiTuote(tuoteid).getSaldo());
+    }
+}
+>>>>>>> mluukkai-lokaali

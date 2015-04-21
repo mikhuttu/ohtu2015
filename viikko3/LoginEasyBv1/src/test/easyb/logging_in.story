@@ -10,7 +10,11 @@ scenario "user can login with correct password", {
     given 'command login selected', {
        userDao = new InMemoryUserDao()
        auth = new AuthenticationService(userDao)
+<<<<<<< HEAD
        io = new StubIO("login", "pekka", "akkep")
+=======
+       io = new StubIO("login", "pekka", "akkep") 
+>>>>>>> mluukkai-lokaali
        app = new App(io, auth)
     }
 
@@ -24,6 +28,7 @@ scenario "user can login with correct password", {
 }
 
 scenario "user can not login with incorrect password", {
+<<<<<<< HEAD
     given 'command login selected', {
        userDao = new InMemoryUserDao()
        auth = new AuthenticationService(userDao)
@@ -55,4 +60,15 @@ scenario "nonexistent user can not login to ", {
     then 'user will not be logged in to system', {
       io.getPrints().shouldHave("wrong username or password")
     }
+=======
+    given 'command login selected'
+    when 'a valid username and incorrect password are entered'
+    then 'user will not be logged in to system'
+}
+
+scenario "nonexistent user can not login to ", {
+    given 'command login selected'
+    when 'a nonexistent username and some password are entered'
+    then 'user will not be logged in to system'
+>>>>>>> mluukkai-lokaali
 }

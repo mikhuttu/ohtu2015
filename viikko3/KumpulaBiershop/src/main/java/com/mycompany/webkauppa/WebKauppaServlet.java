@@ -1,6 +1,10 @@
 
 package com.mycompany.webkauppa;
 
+<<<<<<< HEAD
+=======
+import com.mycompany.webkauppa.ohjaus.KomentoTehdas;
+>>>>>>> mluukkai-lokaali
 import com.mycompany.webkauppa.sovelluslogiikka.Ostoskori;
 import com.mycompany.webkauppa.sovelluslogiikka.Varasto;
 import java.io.IOException;
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public abstract class WebKauppaServlet extends HttpServlet {
+<<<<<<< HEAD
 
     protected HttpSession sessio;
     protected Varasto varasto;
@@ -19,6 +24,16 @@ public abstract class WebKauppaServlet extends HttpServlet {
     public WebKauppaServlet() {
         varasto = Varasto.getInstance();
     }        
+=======
+    protected HttpSession sessio;
+    protected KomentoTehdas tehdas;
+    protected Varasto varasto;
+
+    public WebKauppaServlet() {
+        tehdas = new KomentoTehdas();
+        varasto = new Varasto();
+    }
+>>>>>>> mluukkai-lokaali
     
     public void naytaSivu(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
@@ -29,9 +44,14 @@ public abstract class WebKauppaServlet extends HttpServlet {
         haeSessio(request);
         if ( sessio.getAttribute("ostoskori")==null ) {
             sessio.setAttribute("ostoskori", new Ostoskori());
+<<<<<<< HEAD
         }        
         Ostoskori ostoskori = (Ostoskori)sessio.getAttribute("ostoskori");
         return ostoskori;
+=======
+        }
+        return (Ostoskori) sessio.getAttribute("ostoskori");
+>>>>>>> mluukkai-lokaali
     }
     
     public void haeSessio(HttpServletRequest request) {
