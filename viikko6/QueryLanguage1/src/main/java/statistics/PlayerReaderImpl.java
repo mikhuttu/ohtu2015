@@ -20,7 +20,7 @@ public class PlayerReaderImpl implements PlayerReader {
 
     @Override
     public List<Player> getPlayers() {
-        ArrayList<Player> players = new ArrayList<Player>();
+        ArrayList<Player> players = new ArrayList<>();
 
         while (scanner.hasNextLine()) {
             String[] parts =  scanner.nextLine().split(";");            

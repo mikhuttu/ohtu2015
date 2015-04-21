@@ -4,20 +4,10 @@ import com.mycompany.webkauppa.sovelluslogiikka.Ostos;
 import java.util.*;
 
 public class ToimitusjarjestelmaFasaadi {
-
-    private static ToimitusjarjestelmaFasaadi instance;
-
-    public static ToimitusjarjestelmaFasaadi getInstance() {
-        if (instance == null) {
-            instance = new ToimitusjarjestelmaFasaadi();
-        }
-
-        return instance;
-    }
     private ArrayList<String> toimitukset;
 
     public ToimitusjarjestelmaFasaadi() {
-        toimitukset = new ArrayList<String>();
+        toimitukset = new ArrayList<>();
     }    
     
     public void kirjaatoimitus(String nimi, String osoite, List<Ostos> ostokset){

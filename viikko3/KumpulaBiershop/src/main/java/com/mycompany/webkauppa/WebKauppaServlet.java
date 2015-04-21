@@ -1,6 +1,7 @@
 
 package com.mycompany.webkauppa;
 
+import com.mycompany.webkauppa.ohjaus.KomentoTehdas;
 import com.mycompany.webkauppa.sovelluslogiikka.Ostoskori;
 import com.mycompany.webkauppa.sovelluslogiikka.Varasto;
 import java.io.IOException;
@@ -12,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public abstract class WebKauppaServlet extends HttpServlet {
-
     protected HttpSession sessio;
+    protected KomentoTehdas tehdas;
     protected Varasto varasto;
 
     public WebKauppaServlet() {
-        varasto = Varasto.getInstance();
-    }        
+        tehdas = new KomentoTehdas();
+        varasto = new Varasto();
+    }
     
     public void naytaSivu(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
@@ -29,9 +31,8 @@ public abstract class WebKauppaServlet extends HttpServlet {
         haeSessio(request);
         if ( sessio.getAttribute("ostoskori")==null ) {
             sessio.setAttribute("ostoskori", new Ostoskori());
-        }        
-        Ostoskori ostoskori = (Ostoskori)sessio.getAttribute("ostoskori");
-        return ostoskori;
+        }
+        return (Ostoskori) sessio.getAttribute("ostoskori");
     }
     
     public void haeSessio(HttpServletRequest request) {

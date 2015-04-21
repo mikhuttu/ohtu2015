@@ -7,11 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Statistics {
-    
-    private List<Player> players;
+    private final List<Player> players;
     
     public Statistics(PlayerReader playerReader) {
-        players = playerReader.getPlayers();        
+        players = playerReader.getPlayers();
     }
     
     public Player search(String name) {
@@ -25,20 +24,18 @@ public class Statistics {
     }
     
     public List<Player> team(String teamName) {
-        ArrayList<Player> playersOfTeam = new ArrayList<Player>();
+        ArrayList<Player> team = new ArrayList<>();
         
-        for (Player player : players) {
-            if (player.getTeam().equals(teamName)) {
-                playersOfTeam.add(player);
-            }
-        }
+        players.stream().filter((player) -> (player.getTeam().equals(teamName))).forEach((player) -> {
+            team.add(player);
+        });
         
-        return playersOfTeam;
+        return team;
     }
     
     public List<Player> topScorers(int howMany) {
         Collections.sort(players);
-        ArrayList<Player> topScorers = new ArrayList<Player>();
+        ArrayList<Player> topScorers = new ArrayList<>();
         Iterator<Player> playerIterator = players.iterator();
         
         while (howMany >= 0) {
@@ -50,13 +47,11 @@ public class Statistics {
     }
     
     public List<Player> matches(Matcher matcher) {
-        ArrayList<Player> matches = new ArrayList<Player>();
+        ArrayList<Player> matches = new ArrayList<>();
         
-        for (Player player : players) {
-            if (matcher.matches(player)) {
-                matches.add(player);
-            }            
-        }
+        players.stream().filter((player) -> (matcher.matches(player))).forEach((player) -> {
+            matches.add(player);
+        });
         
         return matches;
     }

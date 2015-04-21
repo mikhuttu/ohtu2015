@@ -11,8 +11,7 @@ public class VarastoTest {
 
     @Before
     public void setUp() {
-	Varasto.resetInstance();
-	varasto = Varasto.getInstance();
+        varasto = new Varasto();
     }
 
     @Test
@@ -25,9 +24,10 @@ public class VarastoTest {
 
     @Test
     public void kahtaSamannimistaEiVoiLisata() {
-        boolean ok = varasto.lisaaTuote("Koff", 3, 10);
+        varasto = new Varasto();
+        varasto.lisaaTuote("Koff", 3, 10);
         
-        assertFalse(ok);
+        assertFalse(varasto.lisaaTuote("Koff", 3, 10));
         assertEquals( 1, tuotteitaVarastossa("Koff") );        
     }
     

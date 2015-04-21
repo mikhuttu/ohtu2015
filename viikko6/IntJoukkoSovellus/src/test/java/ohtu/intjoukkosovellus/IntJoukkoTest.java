@@ -51,7 +51,7 @@ public class IntJoukkoTest {
         joukko.poista(10);
         joukko.lisaa(99);
 
-        int[] vastaus = joukko.toIntArray();
+        int[] vastaus = joukko.getLuvut();
         Arrays.sort(vastaus);
         assertArrayEquals(odotettu, vastaus);
     }

@@ -1,80 +1,84 @@
 package ohtu;
 
 public class TennisGame {
-    
-    private int m_score1 = 0;
-    private int m_score2 = 0;
-    private String player1Name;
-    private String player2Name;
+    private final Player p1;
+    private final Player p2;
 
-    public TennisGame(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+    public TennisGame(String name1, String name2) {
+        p1 = new Player(name1);
+        p2 = new Player(name2);
     }
 
-    public void wonPoint(String playerName) {
-        if (playerName == "player1")
-            m_score1 += 1;
-        else
-            m_score2 += 1;
+    public void wonPoint(String name) {
+        if (name.equals(p1.getName())) {
+            p1.wonPoint();
+            return;
+        }
+        p2.wonPoint();
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
-        {
-            switch (m_score1)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                case 3:
-                        score = "Forty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
+        StringBuilder score = new StringBuilder();
+        
+        if (tilanneTasan()) {
+            score.append(tasaTilanne());
+        }
                 
+        else if (otteluPallo()) {
+            score.append("Advantage player");
+            lisaaJohtoasemassaOlevanPelaajanNumero(score);
+        }
+        
+        else if (peliPaattynyt()) {
+            score.append("Win for player");
+            lisaaJohtoasemassaOlevanPelaajanNumero(score);
+        }
+        
+        else {
+            score.append(p1.pointsToString()).append("-").append(p2.pointsToString());
+        }
+        
+        return score.toString();
+    }
+    
+    protected boolean tilanneTasan() {
+        return p1.getPoints() == p2.getPoints();
+    }
+    
+    protected String tasaTilanne() {
+        if (p1.getPoints() >= 4) {
+            return Tulokset.Deuce.name();
+        }
+        
+        return p1.pointsToString() + "-All";
+    }
+    
+    protected boolean otteluPallo() {
+        return tarkistaJohtajaTaiVoittaja(false);
+    }
+    
+    protected boolean peliPaattynyt() {
+        return tarkistaJohtajaTaiVoittaja(true);
+    }
+    
+    protected boolean tarkistaJohtajaTaiVoittaja(boolean tarkistaVoittaja) {
+        if (p1.getPoints() >= 4 || p2.getPoints() >= 4) {
+            int pisteEro = Math.abs(p1.getPoints() - p2.getPoints());
+            
+            if (tarkistaVoittaja) {
+                return pisteEro >= 2;
             }
+            return pisteEro == 1;
         }
-        else if (m_score1>=4 || m_score2>=4)
-        {
-            int minusResult = m_score1-m_score2;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+        return false;
+    }
+    
+    protected void lisaaJohtoasemassaOlevanPelaajanNumero(StringBuilder score) {
+        if (p1.getPoints() > p2.getPoints()) {
+            score.append("1");
+            return;
         }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
-            }
-        }
-        return score;
+        
+        score.append("2");
     }
 }

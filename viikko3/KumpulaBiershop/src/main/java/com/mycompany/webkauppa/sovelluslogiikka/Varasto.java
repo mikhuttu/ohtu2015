@@ -1,31 +1,19 @@
 package com.mycompany.webkauppa.sovelluslogiikka;
 
 import com.mycompany.webkauppa.model.tietokantayhteydet.TuoteDAO;
+import com.mycompany.webkauppa.model.tietokantayhteydet.TuoteDAOInMemory;
 import java.util.*;
 
 public class Varasto {
-
-    private static Varasto instanssi;
-    private static TuoteDAO tuoteDAO = TuoteDAO.inMemory();
-
-    public static void resetInstance() {
- 	instanssi = new Varasto();
-    }
-
-    public static Varasto getInstance() {
-        if (instanssi == null) {
-            instanssi = new Varasto();
-        }
-
-        return instanssi;
-    }
-
-    public static void setTuoteDAO(TuoteDAO dao) {
-        tuoteDAO = dao;
-    }
+    private TuoteDAO tuoteDAO;
     private List<Tuote> tuotteet;
 
-    private Varasto() {
+    public void setTuoteDAO(TuoteDAO dao) {
+        tuoteDAO = dao;
+    }
+   
+    public Varasto() {
+        tuoteDAO = new TuoteDAOInMemory();
         tuotteet = tuoteDAO.findAll();
     }
 
@@ -33,7 +21,7 @@ public class Varasto {
         return tuotteet;
     }
 
-    public Tuote etsiTuote(long id) {        
+    public Tuote etsiTuote(long id) {
         for (Tuote tuote : tuotteet) {            
             if (tuote.getId() == id) {
                 return tuote;
@@ -73,8 +61,8 @@ public class Varasto {
     }
 
     public boolean lisaaTuote(String nimi, int hinta, int saldo) {
-        for (Tuote tuote : tuotteet) {
-            if ( tuote.getNimi().equals(nimi) ) return false;
+        if (tuotteet.stream().anyMatch((tuote) -> ( tuote.getNimi().equals(nimi) ))) {
+            return false;
         }
         
         Tuote tuote = new Tuote(nimi, hinta);

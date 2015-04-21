@@ -1,7 +1,5 @@
-
 package com.mycompany.webkauppa;
 
-import com.mycompany.webkauppa.ohjaus.OstoksenLisaysKoriin;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +12,7 @@ public class LisaaOstoskoriinServlet extends WebKauppaServlet {
             throws ServletException, IOException {
                 
         long tuoteId = Long.parseLong( request.getParameter("tuoteId") );
-                        
-        OstoksenLisaysKoriin lisays = new OstoksenLisaysKoriin(haeSessionOstoskori(request), tuoteId);
-        lisays.suorita();
+        tehdas.ostoksenLisaysKoriin(haeSessionOstoskori(request), tuoteId).suorita(varasto);
         
         naytaSivu("/Tuotelista", request, response);   
     }
