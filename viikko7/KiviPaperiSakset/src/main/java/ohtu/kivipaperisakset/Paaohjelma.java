@@ -1,11 +1,8 @@
 package ohtu.kivipaperisakset;
 
-import ohtu.kivipaperisakset.pelimoodit.VsPerusTekoAly;
-import ohtu.kivipaperisakset.pelimoodit.VsPelaaja;
-import ohtu.kivipaperisakset.pelimoodit.VsParannettuTekoAly;
 import ohtu.kivipaperisakset.kirjanpito.IO;
 import ohtu.kivipaperisakset.pelimoodit.Peli;
-import ohtu.kivipaperisakset.pelimoodit.VsRandomTekoAly;
+import ohtu.kivipaperisakset.pelimoodit.PeliTehdas;
 
 public class Paaohjelma {
     private static final IO io = new IO();
@@ -17,7 +14,7 @@ public class Paaohjelma {
             
             try {
                 Peli peli = seuraavaPeli(io.nextLine());
-                peli.pelaa();
+                peli.run();
             }
             catch (IllegalStateException e) {
                 break;
@@ -31,16 +28,17 @@ public class Paaohjelma {
             tulostaMilloinPaattyy();
             
             char c = vastaus.charAt(0);
+            PeliTehdas tehdas = new PeliTehdas();
             
             switch (c) {
                 case 'a':
-                    return new VsPelaaja(io);
+                    return tehdas.vsPelaaja(io);
                 case 'b':
-                    return new VsPerusTekoAly(io);
+                    return tehdas.vsPerusTekoAly(io);
                 case 'c':
-                    return new VsParannettuTekoAly(io);
+                    return tehdas.vsParannettuTekoAly(io);
                 case 'd':
-                    return new VsRandomTekoAly(io);
+                    return tehdas.vsRandomTekoAly(io);
                 default:
             }
         }

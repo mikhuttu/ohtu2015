@@ -8,7 +8,7 @@ import ohtu.kivipaperisakset.pelaajat.Pelaaja;
 import ohtu.kivipaperisakset.pelimoodit.siirrot.ParannetunTekoAlynSiirto;
 import ohtu.kivipaperisakset.pelimoodit.siirrot.SiirtoMenetelma;
 
-public class Peli {
+public class Peli implements Runnable {
     protected final IO io;
     protected final Tuomari tuomari;
     protected final Pelaaja pelaaja1;
@@ -21,7 +21,8 @@ public class Peli {
         this.tokanSiirto = siirtoMenetelma;
     }
     
-    public void pelaa() {
+    @Override
+    public void run() {
         try {
             Valinta eka = ensimmaisenPelaajanSiirto();
             Valinta toka = tokanSiirto();
