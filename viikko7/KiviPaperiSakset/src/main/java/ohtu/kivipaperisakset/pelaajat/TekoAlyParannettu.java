@@ -2,18 +2,21 @@ package ohtu.kivipaperisakset.pelaajat;
 
 // "Muistava tekoäly"
 
-public class TekoalyParannettu implements Pelaaja {
-    private final String[] muisti;
+import ohtu.kivipaperisakset.kirjanpito.Valinta;
+import static ohtu.kivipaperisakset.kirjanpito.Valinta.*;
+
+public class TekoAlyParannettu implements Pelaaja {
+    private final Valinta[] muisti;
     private int vapaaMuistiIndeksi;
 
-    public TekoalyParannettu(int muistinKoko) {
-        muisti = new String[muistinKoko];
+    public TekoAlyParannettu(int muistinKoko) {
+        muisti = new Valinta[muistinKoko];
         vapaaMuistiIndeksi = 0;
     }
   
   // jos muisti täyttyy, unohdetaan viimeinen alkio
   
-    public void asetaSiirto(String siirto) {
+    public void asetaSiirto(Valinta siirto) {
         if (vapaaMuistiIndeksi == muisti.length) {
             for (int i = 1; i < muisti.length; i++) {
                 muisti[i - 1] = muisti[i];
@@ -27,26 +30,28 @@ public class TekoalyParannettu implements Pelaaja {
     }
 
     @Override
-    public String annaSiirto() {
+    public Valinta annaSiirto() {
         if (vapaaMuistiIndeksi == 0 || vapaaMuistiIndeksi == 1) {
-            return "k";
+            return KIVI;
         }
 
-        String viimeisinSiirto = muisti[vapaaMuistiIndeksi - 1];
+        Valinta viimeisinSiirto = muisti[vapaaMuistiIndeksi - 1];
 
         int k = 0;
         int p = 0;
         int s = 0;
 
         for (int i = 0; i < vapaaMuistiIndeksi - 1; i++) {
-            if (viimeisinSiirto.equals(muisti[i])) {
-                String seuraava = muisti[i + 1];
+            if (viimeisinSiirto == muisti[i]) {
+                Valinta seuraava = muisti[i + 1];
 
-                if ("k".equals(seuraava)) {
+                if (seuraava == KIVI) {
                     k++;
-                } else if ("p".equals(seuraava)) {
+                }
+                else if (seuraava == PAPERI) {
                     p++;
-                } else {
+                }
+                else {
                     s++;
                 }
             }
@@ -59,11 +64,11 @@ public class TekoalyParannettu implements Pelaaja {
     // muulloin annetaan aina kivi
     
         if (k > p && k > s) {
-            return "p";
+            return PAPERI;
         } else if (p > k && p > s) {
-            return "s";
+            return SAKSET;
         } else {
-            return "k";
+            return KIVI;
         }
     }
 }

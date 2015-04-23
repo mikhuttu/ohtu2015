@@ -1,41 +1,72 @@
 package ohtu.kivipaperisakset;
 
-import ohtu.kivipaperisakset.pelimoodit.VsPerusTekoaly;
+import ohtu.kivipaperisakset.pelimoodit.VsPerusTekoAly;
 import ohtu.kivipaperisakset.pelimoodit.VsPelaaja;
-import ohtu.kivipaperisakset.pelimoodit.VsParannettuTekoaly;
-import java.util.Scanner;
+import ohtu.kivipaperisakset.pelimoodit.VsParannettuTekoAly;
+import ohtu.kivipaperisakset.kirjanpito.IO;
+import ohtu.kivipaperisakset.pelimoodit.Peli;
+import ohtu.kivipaperisakset.pelimoodit.VsRandomTekoAly;
 
 public class Paaohjelma {
-
-    private static final Scanner scanner = new Scanner(System.in);
-
+    private static final IO io = new IO();
+    
     public static void main(String[] args) {
-
+        
         while (true) {
-            System.out.println("\nValitse pelataanko"
-                    + "\n (a) ihmistä vastaan "
-                    + "\n (b) tekoälyä vastaan"
-                    + "\n (c) parannettua tekoälyä vastaan"
-                    + "\nmuilla valinnoilla lopetataan");
-
-            String vastaus = scanner.nextLine();
-            if (vastaus.endsWith("a")) {
-                System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                VsPelaaja kaksinpeli = new VsPelaaja();
-                kaksinpeli.pelaa();
-            } else if (vastaus.endsWith("b")) {
-                System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                VsPerusTekoaly yksinpeli = new VsPerusTekoaly();
-                yksinpeli.pelaa();
-            } else if (vastaus.endsWith("c")) {
-                System.out.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s");
-                VsParannettuTekoaly pahaYksinpeli = new VsParannettuTekoaly();
-                pahaYksinpeli.pelaa();
-            } else {
+            tulostaAloitusTeksti();
+            
+            try {
+                Peli peli = seuraavaPeli(io.nextLine());
+                peli.pelaa();
+            }
+            catch (IllegalStateException e) {
                 break;
             }
-
         }
-
+    }
+    
+    private static Peli seuraavaPeli(String vastaus) {
+        
+        if (validiVastaus(vastaus)) {
+            tulostaMilloinPaattyy();
+            
+            char c = vastaus.charAt(0);
+            
+            switch (c) {
+                case 'a':
+                    return new VsPelaaja(io);
+                case 'b':
+                    return new VsPerusTekoAly(io);
+                case 'c':
+                    return new VsParannettuTekoAly(io);
+                case 'd':
+                    return new VsRandomTekoAly(io);
+                default:
+            }
+        }
+        
+        throw new IllegalStateException();
+    }
+    
+    private static void tulostaAloitusTeksti() {
+        io.println("\nValitse pelataanko"
+                + "\n (a) ihmistä vastaan "
+                + "\n (b) tekoälyä vastaan"
+                + "\n (c) parannettua tekoälyä vastaan"
+                + "\n (d) random tekoälyä vastaan"
+                + "\nmuilla valinnoilla lopetataan");
+    }
+    
+    private static void tulostaMilloinPaattyy() {
+        io.println("peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"); 
+    }
+    
+    private static boolean validiVastaus(String vastaus) {
+        if (vastaus.length() == 1) {
+            char c = vastaus.charAt(0);
+            return c == 'a' || c == 'b' || c == 'c' || c == 'd';
+        }
+        
+        return false;
     }
 }

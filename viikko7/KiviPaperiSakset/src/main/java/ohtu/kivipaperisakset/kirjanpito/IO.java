@@ -9,7 +9,15 @@ public class IO {
         this.scanner = new Scanner(System.in);
     }
     
-    public String next() {
+    public String nextLine() {
         return scanner.nextLine();
+    }
+    
+    public void println(String teksti) {
+        print(teksti + "\n");
+    }
+    
+    public void print(String teksti) {
+        System.out.print(teksti);
     }
 }

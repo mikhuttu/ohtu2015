@@ -1,5 +1,7 @@
 package ohtu.kivipaperisakset.pelaajat;
 
+import ohtu.kivipaperisakset.kirjanpito.Valinta;
+
 public interface Pelaaja {
-    String annaSiirto();
+    public Valinta annaSiirto();
 }

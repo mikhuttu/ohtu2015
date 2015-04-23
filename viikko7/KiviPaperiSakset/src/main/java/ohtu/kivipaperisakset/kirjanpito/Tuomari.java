@@ -1,5 +1,7 @@
 package ohtu.kivipaperisakset.kirjanpito;
 
+import static ohtu.kivipaperisakset.kirjanpito.Valinta.*;
+
 public class Tuomari {
     private int ekanPisteet;
     private int tokanPisteet;
@@ -11,30 +13,22 @@ public class Tuomari {
         this.tasapelit = 0;
     }
 
-    public void kirjaaSiirto(String ekanSiirto, String tokanSiirto) {
-        if (tasapeli(ekanSiirto, tokanSiirto)) {
-            tasapelit++;
-        } else if (ekaVoittaa(ekanSiirto, tokanSiirto)) {
+    public void kirjaaSiirto(Valinta ekanSiirto, Valinta tokanSiirto) {
+        if (ekaVoittaa(ekanSiirto, tokanSiirto)) {
             ekanPisteet++;
-        } else {
+        }
+        else if (ekaVoittaa(tokanSiirto, ekanSiirto)) {
             tokanPisteet++;
         }
-    }
-
-    private boolean tasapeli(String eka, String toka) {
-        return eka.equals(toka);
-    }
-
-    private boolean ekaVoittaa(String eka, String toka) {
-        if ("k".equals(eka) && "s".equals(toka)) {
-            return true;
-        } else if ("s".equals(eka) && "p".equals(toka)) {
-            return true;
-        } else if ("p".equals(eka) && "k".equals(toka)) {
-            return true;
+        else {
+            tasapelit++;
         }
+    }
 
-        return false;
+    private boolean ekaVoittaa(Valinta eka, Valinta toka) {
+        return eka == KIVI && toka == SAKSET ||
+               eka == SAKSET && toka == PAPERI ||
+               eka == PAPERI && toka == KIVI;
     }
 
     @Override
